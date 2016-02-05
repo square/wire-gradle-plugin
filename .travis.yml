@@ -1,8 +1,14 @@
-language: java
+language: android
 
 jdk:
   - oraclejdk7
   - oraclejdk8
+
+android:
+  components:
+  - android-23
+  - tools
+  - build-tools-23.0.2
 
 script:
   - ./gradlew clean check
