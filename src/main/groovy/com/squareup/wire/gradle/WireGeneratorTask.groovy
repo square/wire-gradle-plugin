@@ -5,12 +5,14 @@ import com.google.common.collect.Lists
 import com.google.common.collect.Multimap
 import com.google.common.collect.Sets
 import com.squareup.wire.WireCompiler
+import groovy.transform.CompileStatic
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 /** Task to generate Java for a set of .proto files with the Wire compiler. */
+@CompileStatic
 class WireGeneratorTask extends DefaultTask {
   Collection<WireSourceSetExtension> configurations
 

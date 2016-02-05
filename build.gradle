@@ -1,15 +1,50 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+  }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'com.github.ben-manes.versions'
 
 group = GROUP
 version = VERSION_NAME
+
+// Write the plugin's classpath to a file to share with the tests
+task createClasspathManifest {
+  def outputDir = file("$buildDir/$name")
+
+  inputs.files sourceSets.main.runtimeClasspath
+  outputs.dir outputDir
+
+  doLast {
+    outputDir.mkdirs()
+    file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+  }
+}
 
 dependencies {
   compile gradleApi()
   compile localGroovy()
 
-  compile 'com.android.tools.build:gradle:1.2.3'
-  compile 'com.squareup.wire:wire-compiler:1.8.0'
+  compile 'com.android.tools.build:gradle:1.5.0'
+  compile 'com.squareup.wire:wire-compiler:2.1.1'
+
+  testCompile gradleTestKit()
+  testCompile 'org.assertj:assertj-core:3.3.0'
+  testRuntime files(createClasspathManifest)
+}
+
+test {
+  testLogging {
+    events 'passed', 'skipped', 'failed', 'standardOut'
+    exceptionFormat 'full'
+  }
 }
 
 repositories {
