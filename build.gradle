@@ -36,7 +36,7 @@ dependencies {
   compile 'com.squareup.wire:wire-compiler:2.1.1'
 
   testCompile gradleTestKit()
-  testCompile 'org.assertj:assertj-core:3.3.0'
+  testCompile 'org.assertj:assertj-core:2.3.0'
   testRuntime files(createClasspathManifest)
 }
 
