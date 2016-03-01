@@ -3,10 +3,13 @@ package com.squareup.wire.gradle
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Lists
 import com.google.common.collect.Multimap
+import groovy.transform.CompileStatic
 import org.gradle.api.Project
+import org.gradle.api.file.FileTreeElement
 import org.gradle.api.tasks.util.PatternSet
 
 /** An extension defining a set of proto sources and Wire compiler options. */
+@CompileStatic
 class WireSourceSetExtension {
   private final Project project
 
@@ -61,7 +64,7 @@ class WireSourceSetExtension {
     PatternSet patternSet = new PatternSet().include("**/*.proto")
     def files = ArrayListMultimap.create()
     for (String folder : folders) {
-      project.files(folder).getAsFileTree().matching(patternSet).visit { element ->
+      project.files(folder).getAsFileTree().matching(patternSet).visit { FileTreeElement element ->
         if (!element.directory) {
           files.put(folder, element.relativePath.pathString)
         }
