@@ -5,12 +5,14 @@ import com.google.common.collect.Lists
 import com.google.common.collect.Multimap
 import com.google.common.collect.Sets
 import com.squareup.wire.WireCompiler
+import groovy.transform.CompileStatic
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 /** Task to generate Java for a set of .proto files with the Wire compiler. */
+@CompileStatic
 class WireGeneratorTask extends DefaultTask {
   Collection<WireSourceSetExtension> configurations
 
@@ -36,6 +38,7 @@ class WireGeneratorTask extends DefaultTask {
 
     for (WireSourceSetExtension configuration : getConfigurations()) {
       boolean noOptions = configuration.getNoOptions()
+      boolean android = configuration.getAndroid()
       Collection<String> enumOptions = configuration.getEnumOptions()
       Collection<String> roots = configuration.getRoots()
       String serviceWriter = configuration.getServiceWriter()
@@ -54,6 +57,9 @@ class WireGeneratorTask extends DefaultTask {
 
         if (noOptions) {
           args.add("--no_options")
+        }
+        if (android) {
+          args.add("--android")
         }
         enumOptions.each { option ->
           args.add("--enum_options=" + option)
