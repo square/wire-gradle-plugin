@@ -38,6 +38,7 @@ class WireGeneratorTask extends DefaultTask {
 
     for (WireSourceSetExtension configuration : getConfigurations()) {
       boolean noOptions = configuration.getNoOptions()
+      boolean android = configuration.getAndroid()
       Collection<String> enumOptions = configuration.getEnumOptions()
       Collection<String> roots = configuration.getRoots()
       String serviceWriter = configuration.getServiceWriter()
@@ -56,6 +57,9 @@ class WireGeneratorTask extends DefaultTask {
 
         if (noOptions) {
           args.add("--no_options")
+        }
+        if (android) {
+          args.add("--android")
         }
         enumOptions.each { option ->
           args.add("--enum_options=" + option)

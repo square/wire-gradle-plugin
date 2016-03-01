@@ -21,6 +21,7 @@ class WireSourceSetExtension {
 
   // Properties passed to the Wire compiler.
   private boolean noOptions
+  private boolean android
   private List<String> enumOptions = Lists.newArrayList()
   private List<String> protoPaths = Lists.newArrayList()
   private List<String> roots = Lists.newArrayList()
@@ -80,6 +81,14 @@ class WireSourceSetExtension {
 
   public boolean getNoOptions() {
     return noOptions
+  }
+
+  void setAndroid(boolean android) {
+    this.android = android
+  }
+
+  boolean getAndroid() {
+    return android
   }
 
   void setEnumOptions(Iterable<String> enumOptions) {

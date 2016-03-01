@@ -24,7 +24,7 @@ class BasicIntegrationTest {
         .withArguments("compileDebugJava")
         .build()
 
-    final genDir = new File(projectDir.root, "build/generated/source/proto/debug")
+    final genDir = new File(projectDir.root, "build/generated/source/proto/debug/${BuildFiles.PACKAGE.replace('.', '/')}")
     assertThat(genDir).isDirectory()
     assertThat(genDir.listFiles().length).isGreaterThan(0)
   }

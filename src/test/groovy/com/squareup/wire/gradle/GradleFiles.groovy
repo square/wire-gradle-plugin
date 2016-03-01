@@ -70,4 +70,38 @@ dependencies {
 }
     """
   }
+
+  static String androidWithSupportAnnotations(String classpathString) {
+    """
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:1.5.0"
+    classpath files(${classpathString})
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.squareup.wire'
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion "23.0.2"
+
+  sourceSets.main.wire.android = true
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile '$RUNTIME'
+  provided 'com.android.support:support-annotations:23.2.0'
+}
+    """
+  }
 }
