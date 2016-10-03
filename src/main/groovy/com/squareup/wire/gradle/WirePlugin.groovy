@@ -63,6 +63,8 @@ class WirePlugin implements Plugin<Project> {
           (JavaCompile) project.tasks.getByName("compile${taskName.capitalize()}Java")
       compileTask.source += project.fileTree(task.outputDir)
       compileTask.dependsOn(task)
+      def kotlinCompileTask = project.tasks.getByName("compile${taskName.capitalize()}Kotlin")
+      kotlinCompileTask.dependsOn(task)
     }
   }
 
