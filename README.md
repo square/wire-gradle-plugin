@@ -1,7 +1,10 @@
 Wire Gradle Plugin
 ==================
 
-TODO
+Deprecated!
+-----------
+
+This project is now deprecated. Its replacement is `wire-gradle-plugin`, within the [Wire Protocol Buffers](https://github.com/square/wire/) project.
 
 
 
